@@ -1,0 +1,15 @@
+<div>
+  <button
+    [disabled]="currentPage === 1"
+    (click)="goToPreviousPage()"
+  >
+    back
+  </button>
+  <span>{{ currentPage }} of {{ totalPages }}</span>
+  <button
+    [disabled]="currentPage === totalPages"
+    (click)="goToNextPage()"
+  >
+    next
+  </button>
+</div>

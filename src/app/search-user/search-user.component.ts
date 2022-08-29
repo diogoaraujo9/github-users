@@ -8,11 +8,11 @@ import { UserHttpService } from 'src/app/_common/services/user.http.service';
   styleUrls: ['./search-user.component.scss']
 })
 export class SearchUserComponent {
-  searchText = '';
+  public searchText = '';
 
   constructor(private router: Router, private userHttpService: UserHttpService) {}
 
-  async searchUser() {
+  public async searchUser() {
     const user = await this.userHttpService.loadUser(this.searchText);
 
     if (user) {

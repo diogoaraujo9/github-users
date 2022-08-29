@@ -9,4 +9,5 @@ export interface User {
   followers: number;
   following: number;
   url: string;
+  public_repos: number;
 }

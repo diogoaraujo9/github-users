@@ -1,0 +1,30 @@
+<div>
+  <button (click)="navigateToSearchPage()">back</button>
+  <img [src]="user?.avatar_url" />
+  <p>Name: {{ user?.name || '-' }}</p>
+  <p>Login: {{ user?.login || '-' }}</p>
+  <p>Description: {{ user?.bio || '-' }}</p>
+  <p>Followers: {{ user?.followers || '-' }}</p>
+  <p>Following: {{ user?.following || '-' }}</p>
+  <p>Location: {{ user?.location || '-' }}</p>
+
+  <ng-container *ngIf="!selectedRepository; else repositoryDetails">
+    <p>Repositories:</p>
+    <pagination
+      [currentPage]="repositoryCurrentPage"
+      [totalPages]="repositoryTotalPages"
+      (updatedPage)="loadRepositories($event)"
+    >
+    </pagination>
+    <ul>
+      <li *ngFor="let repository of repositories">
+        <span (click)="showRepositoryDetails(repository)">{{ repository.name }}</span>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #repositoryDetails>
+    <button (click)="showRepositoryList()">back</button>
+    {{ selectedRepository?.name }}
+  </ng-template>
+</div>
