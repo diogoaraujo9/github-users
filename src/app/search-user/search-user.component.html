@@ -1,10 +1,42 @@
-<div>
+<div class="search-user">
   <img
     src="../../assets/images/github-logo.png"
     width="100px"
     height="100px"
     alt=""
   />
-  <input [(ngModel)]="searchText" />
-  <button (click)="searchUser()">Search</button>
+
+  <h1>GitHub user search</h1>
+
+  <form [formGroup]="form">
+    <div class="form-search">
+      <label for="github-user-search">Username:</label>
+      <input
+        id="github-user-search"
+        placeholder="Find an user..."
+        type="text"
+        formControlName="username"
+        (keydown.enter)="searchUser()"
+      />
+    </div>
+
+    <button
+      type="button"
+      [disabled]="form.invalid"
+      (click)="searchUser()"
+    >
+      <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+      Search
+    </button>
+  </form>
+
+  <ul
+    *ngIf="form.invalid && (form.dirty || form.touched)"
+    class="validation-list"
+  >
+    <li *ngIf="usernameControl.errors?.['required']">Username is required.</li>
+    <li *ngIf="usernameControl.errors?.['invalidUsername']">
+      Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
+    </li>
+  </ul>
 </div>

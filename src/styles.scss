@@ -1,16 +1,30 @@
-:host {
+@use './styles/utils.scss' as *;
+@use './styles/atoms/input.scss' as *;
+@use './styles/atoms/button.scss' as *;
+@use './styles/molecules/list.scss' as *;
+
+html,
+body {
+  height: 100%;
   box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
   margin: 8px 0;
+}
+
+h1 {
+  font-size: rem(32);
 }
 
 p {
   margin: 0;
+  font-size: rem(16);
 }
