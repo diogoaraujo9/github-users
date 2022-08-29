@@ -1,15 +1,17 @@
-<div>
+<div class="pagination">
   <button
+    class="icon-button icon-button--small"
     [disabled]="currentPage === 1"
     (click)="goToPreviousPage()"
   >
-    back
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
   </button>
   <span>{{ currentPage }} of {{ totalPages }}</span>
   <button
+    class="icon-button icon-button--small"
     [disabled]="currentPage === totalPages"
     (click)="goToNextPage()"
   >
-    next
+    <fa-icon [icon]="faArrowRight"></fa-icon>
   </button>
 </div>

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { Repository } from '../_common/models/repository';
+
 import { User } from '../_common/models/user';
-import { RepositoryHttpService } from '../_common/services/repository.http.service';
 import { UserHttpService } from '../_common/services/user.http.service';
 import { UserService } from '../_common/services/user.service';
 
@@ -14,18 +14,14 @@ import { UserService } from '../_common/services/user.service';
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   public user: User | null = null;
-  public repositories: Repository[] = [];
-  public selectedRepository: Repository | null = null;
-  public repositoryCurrentPage: number = 1;
-  public repositoryTotalPages: number = 1;
-  private readonly repositoryPerPage: number = 10;
+  public faLocationDot = faLocationDot;
+  public faArrowLeft = faArrowLeft;
   private subscriptions = new Subscription();
 
   constructor(
     private _route: ActivatedRoute,
     private userHttpService: UserHttpService,
     private userService: UserService,
-    private repositoryHttpService: RepositoryHttpService,
     private router: Router
   ) {}
 
@@ -52,27 +48,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         return;
       }
     }
-
-    this.repositoryTotalPages = Math.ceil(this.user.public_repos / this.repositoryPerPage);
-    await this.loadRepositories();
-  }
-
-  public async loadRepositories(page: number = 1): Promise<void> {
-    if (!this.user) {
-      return;
-    }
-
-    this.repositoryCurrentPage = page;
-    this.repositories =
-      (await this.repositoryHttpService.loadRepositories(this.user.login, page, this.repositoryPerPage)) || [];
-  }
-
-  public showRepositoryDetails(repository: Repository): void {
-    this.selectedRepository = repository;
-  }
-
-  public showRepositoryList(): void {
-    this.selectedRepository = null;
   }
 
   public navigateToSearchPage(): void {

@@ -20,11 +20,12 @@ export class RepositoryHttpService {
   public async loadRepositories(
     username: string,
     page: number = 1,
-    perPage: number = 10
+    perPage: number = 10,
+    sortDirection: string = 'asc'
   ): Promise<Repository[] | null> {
     try {
       const res = await this.http.get<Repository[]>(
-        `${environment.gitHubBaseUrl}/users/${username}/repos?page=${page}&per_page=${perPage}`,
+        `${environment.gitHubBaseUrl}/users/${username}/repos?page=${page}&per_page=${perPage}&direction=${sortDirection}`,
         {
           headers: this.headers
         }

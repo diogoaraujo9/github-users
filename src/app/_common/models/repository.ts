@@ -7,6 +7,7 @@ export interface Repository {
   owner: User;
   description: string;
   created_at: string;
+  updated_at: string;
   html_url: string;
   stargazers_count: number;
   watchers_count: number;

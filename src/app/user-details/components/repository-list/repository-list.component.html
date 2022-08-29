@@ -1,0 +1,42 @@
+<div class="list-header">
+  <h2>Repositories</h2>
+  <pagination
+    [currentPage]="repositoryCurrentPage"
+    [totalPages]="repositoryTotalPages"
+    (updatedPage)="loadRepositories($event)"
+  >
+  </pagination>
+</div>
+<div class="repository-list">
+  <div class="repository-list__columns">
+    <div
+      class="repository-list__column"
+      (click)="changeSortDirection()"
+    >
+      <fa-icon [icon]="sortDirection === 'asc' ? faArrowUp : faArrowDown"></fa-icon>
+      <strong>Name</strong>
+    </div>
+    <div class="repository-list__column">
+      <strong>Stars</strong>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let repository of repositories"
+    class="repository-list__item"
+    (click)="showRepositoryDetails(repository)"
+  >
+    <div class="repository-list__column">
+      <p>{{ repository.name }}</p>
+      <p class="description">{{ repository.description }}</p>
+    </div>
+    <div class="repository-list__column">
+      <p><fa-icon [icon]="faStar"></fa-icon> {{ repository.stargazers_count }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #repositoryDetails>
+  <button (click)="showRepositoryList()">back</button>
+  {{ selectedRepository?.name }}
+</ng-template>

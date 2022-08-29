@@ -1,0 +1,55 @@
+@use '../../../../styles/utils.scss' as *;
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repository-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item,
+  &__columns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+  }
+
+  &__item {
+    background-color: $white;
+    transition: background-color 0.4s ease-in-out;
+    cursor: pointer;
+
+    p {
+      overflow: hidden;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $gray;
+    }
+
+    &:hover {
+      background-color: $light-gray;
+    }
+  }
+
+  &__column {
+    &:nth-child(1) {
+      flex-grow: 1;
+      width: 95%;
+      cursor: pointer;
+    }
+
+    &:nth-child(2) {
+      min-width: 68px;
+      width: 5%;
+    }
+  }
+
+  fa-icon {
+    margin-right: 4px;
+  }
+}

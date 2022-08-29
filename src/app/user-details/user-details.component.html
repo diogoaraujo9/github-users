@@ -1,30 +1,40 @@
-<div class="user-details">
-  <button (click)="navigateToSearchPage()">back</button>
-  <img [src]="user?.avatar_url" />
-  <p>Name: {{ user?.name || '-' }}</p>
-  <p>Login: {{ user?.login || '-' }}</p>
-  <p>Description: {{ user?.bio || '-' }}</p>
-  <p>Followers: {{ user?.followers || '-' }}</p>
-  <p>Following: {{ user?.following || '-' }}</p>
-  <p>Location: {{ user?.location || '-' }}</p>
-
-  <ng-container *ngIf="!selectedRepository; else repositoryDetails">
-    <p>Repositories:</p>
-    <pagination
-      [currentPage]="repositoryCurrentPage"
-      [totalPages]="repositoryTotalPages"
-      (updatedPage)="loadRepositories($event)"
+<div class="user-page">
+  <div class="user-page__header">
+    <button
+      class="icon-button"
+      (click)="navigateToSearchPage()"
     >
-    </pagination>
-    <ul>
-      <li *ngFor="let repository of repositories">
-        <span (click)="showRepositoryDetails(repository)">{{ repository.name }}</span>
-      </li>
-    </ul>
-  </ng-container>
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+    <h1>User details</h1>
+  </div>
+  <div class="user-details">
+    <img [src]="user?.avatar_url" />
+    <div class="user-details__info">
+      <p *ngIf="user?.name">{{ user?.name }}</p>
+      <p *ngIf="user?.login">{{ user?.login }}</p>
+      <p
+        *ngIf="user?.bio"
+        class="description"
+      >
+        {{ user?.bio }}
+      </p>
+      <p
+        *ngIf="user?.location"
+        class="user-details__row"
+      >
+        <fa-icon [icon]="faLocationDot"></fa-icon>{{ user?.location }}
+      </p>
+      <div class="user-details__row">
+        <p>
+          <strong>{{ user?.followers || 0 }}</strong> followers
+        </p>
+        <p>
+          <strong>{{ user?.following || 0 }}</strong> following
+        </p>
+      </div>
+    </div>
+  </div>
 
-  <ng-template #repositoryDetails>
-    <button (click)="showRepositoryList()">back</button>
-    {{ selectedRepository?.name }}
-  </ng-template>
+  <repository-list [user]="user"></repository-list>
 </div>
