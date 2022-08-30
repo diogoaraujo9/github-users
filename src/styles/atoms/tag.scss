@@ -1,0 +1,8 @@
+@use '../utils.scss' as *;
+
+.tag {
+  padding: 4px 12px;
+  background: $white;
+  border-radius: 14px;
+  color: $dark-type;
+}

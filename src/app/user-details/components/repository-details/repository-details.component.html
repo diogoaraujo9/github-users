@@ -1,0 +1,38 @@
+<div class="repository-details">
+  <button
+    class="button return-button"
+    (click)="emitGoBack()"
+  >
+    <fa-icon [icon]="faArrowLeftLong"></fa-icon>
+    Voltar para a listagem
+  </button>
+  <div class="details-header">
+    <h3>{{ repository?.name }}</h3>
+
+    <div class="details-counters">
+      <div><fa-icon [icon]="faEye"></fa-icon>Watchers: {{ repository?.watchers_count }}</div>
+      <div><fa-icon [icon]="faCodeFork"></fa-icon>Forks: {{ repository?.forks_count }}</div>
+      <div><fa-icon [icon]="faStar"></fa-icon>Stars: {{ repository?.stargazers_count }}</div>
+    </div>
+  </div>
+  <p class="description">{{ repository?.description }}</p>
+  <div class="details-dates">
+    <p>Data de criação: {{ repository?.created_at | date: 'dd/MM/yyyy' }}</p>
+    <p>Data de última atualização: {{ repository?.updated_at | date: 'dd/MM/yyyy' }}</p>
+  </div>
+
+  <div *ngIf="repository?.language">
+    Linguagem: <span class="tag">{{ repository?.language }}</span>
+  </div>
+  <div
+    *ngIf="repository?.topics?.length"
+    class="details-topics"
+  >
+    <span
+      *ngFor="let topic of repository?.topics"
+      class="tag"
+    >
+      {{ topic }}
+    </span>
+  </div>
+</div>

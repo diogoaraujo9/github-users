@@ -1,0 +1,31 @@
+.repository-details {
+  padding: 20px;
+}
+
+.details-header,
+.description,
+.details-dates,
+.return-button {
+  margin-bottom: 12px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-counters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  fa-icon {
+    margin-right: 8px;
+  }
+}
+
+.details-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

@@ -1,5 +1,5 @@
 <div class="list-header">
-  <h2>Repositories</h2>
+  <h2>Repositórios</h2>
   <pagination
     [currentPage]="repositoryCurrentPage"
     [totalPages]="repositoryTotalPages"
@@ -14,29 +14,34 @@
       (click)="changeSortDirection()"
     >
       <fa-icon [icon]="sortDirection === 'asc' ? faArrowUp : faArrowDown"></fa-icon>
-      <strong>Name</strong>
+      <strong>Nome</strong>
     </div>
     <div class="repository-list__column">
       <strong>Stars</strong>
     </div>
   </div>
 
-  <div
-    *ngFor="let repository of repositories"
-    class="repository-list__item"
-    (click)="showRepositoryDetails(repository)"
-  >
-    <div class="repository-list__column">
-      <p>{{ repository.name }}</p>
-      <p class="description">{{ repository.description }}</p>
-    </div>
-    <div class="repository-list__column">
-      <p><fa-icon [icon]="faStar"></fa-icon> {{ repository.stargazers_count }}</p>
-    </div>
+  <div class="card">
+    <ng-container *ngIf="!selectedRepository">
+      <div
+        *ngFor="let repository of repositories"
+        class="repository-list__item"
+        (click)="showRepositoryDetails(repository)"
+      >
+        <div class="repository-list__column">
+          <p>{{ repository.name }}</p>
+          <p class="description">{{ repository.description }}</p>
+        </div>
+        <div class="repository-list__column">
+          <p><fa-icon [icon]="faStar"></fa-icon> {{ repository.stargazers_count }}</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedRepository">
+      <repository-details
+        [repository]="selectedRepository"
+        (goBack)="showRepositoryList()"
+      ></repository-details>
+    </ng-container>
   </div>
 </div>
-
-<ng-template #repositoryDetails>
-  <button (click)="showRepositoryList()">back</button>
-  {{ selectedRepository?.name }}
-</ng-template>

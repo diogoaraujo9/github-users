@@ -1,0 +1,29 @@
+<form
+  class="username-form"
+  [formGroup]="form"
+>
+  <div class="input-icon username-form__search">
+    <input
+      id="github-user-search"
+      class="input-icon"
+      type="text"
+      formControlName="username"
+      maxlength="39"
+      [placeholder]="size === 'big' ? 'Digite o “User-nam3” que está procurando…' : 'Digite o “User-nam3”'"
+      [class.input--size-big]="size === 'big'"
+      [class.error]="form.invalid && (form.dirty || form.touched)"
+      (keydown.enter)="searchUser()"
+    />
+    <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+  </div>
+
+  <button
+    class="icon-button"
+    type="button"
+    [class.icon-button--size-big]="size === 'big'"
+    [disabled]="form.invalid"
+    (click)="searchUser()"
+  >
+    <fa-icon [icon]="faArrowRightLong"></fa-icon>
+  </button>
+</form>

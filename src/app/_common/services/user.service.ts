@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { User } from '../models/user';
 
 @Injectable({
@@ -15,5 +16,13 @@ export class UserService {
 
   public storeUser(user: User): void {
     this.users[user.login] = user;
+  }
+
+  public validateFormUsername(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
+      const valid = /^[a-z\d]+([a-z\d]|-(?=[a-z\d]))*$/.test(control.value);
+      return valid ? null : { invalidUsername: { value: control.value } };
+    };
   }
 }

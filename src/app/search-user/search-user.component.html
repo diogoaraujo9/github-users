@@ -1,43 +1,20 @@
 <div class="search-page">
   <img
+    class="logo-image"
     src="../../assets/images/github-logo.png"
     width="100px"
     height="100px"
     alt=""
   />
 
-  <h1>GitHub user search</h1>
-
-  <form [formGroup]="form">
-    <div class="form-search">
-      <label for="github-user-search">Username:</label>
-      <input
-        id="github-user-search"
-        placeholder="Find an user..."
-        type="text"
-        formControlName="username"
-        (keydown.enter)="searchUser()"
-      />
-    </div>
-
-    <button
-      class="button"
-      type="button"
-      [disabled]="form.invalid"
-      (click)="searchUser()"
-    >
-      <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
-      Search
-    </button>
-  </form>
-
-  <ul
-    *ngIf="form.invalid && (form.dirty || form.touched)"
-    class="validation-list"
+  <username-search-form
+    size="big"
+    (searchUsername)="searchUser($event)"
   >
-    <li *ngIf="usernameControl.errors?.['required']">Username is required.</li>
-    <li *ngIf="usernameControl.errors?.['invalidUsername']">
-      Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
-    </li>
-  </ul>
+  </username-search-form>
+
+  <p class="validation-description">
+    O nome de usuário pode conter apenas caracteres alfanuméricos ou hifens simples e não pode começar ou terminar com
+    um hífen.
+  </p>
 </div>

@@ -1,6 +1,7 @@
 @use './styles/utils.scss' as *;
-@use './styles/atoms/input.scss' as *;
 @use './styles/atoms/button.scss' as *;
+@use './styles/atoms/input.scss' as *;
+@use './styles/atoms/tag.scss' as *;
 @use './styles/atoms/text.scss' as *;
 @use './styles/molecules/list.scss' as *;
 
@@ -15,11 +16,13 @@ body {
   font-family: sans-serif;
   line-height: 1.5;
   color: $type;
+  background-color: $background;
 }
 
 h1,
-h2 {
-  margin: 8px 0;
+h2,
+h3 {
+  margin: 0;
 }
 
 h1 {

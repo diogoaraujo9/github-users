@@ -37,17 +37,22 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  public changeUser(username: string): void {
+    this.router.navigate(['user', username]);
+  }
+
   public async loadUserDetails(username: string): Promise<void> {
-    this.user = this.userService.getUser(username);
+    let user: User | null = this.userService.getUser(username);
 
-    if (!this.user) {
-      this.user = await this.userHttpService.loadUser(username);
+    if (!user) {
+      user = await this.userHttpService.loadUser(username);
 
-      if (!this.user) {
-        this.navigateToSearchPage();
+      if (!user) {
         return;
       }
     }
+
+    this.user = user;
   }
 
   public navigateToSearchPage(): void {

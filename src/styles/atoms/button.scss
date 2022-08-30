@@ -4,13 +4,14 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  background: $primary;
-  border: 1px solid $black;
+  gap: 8px;
+  background: $element-dark;
+  border: 1px solid $gray;
   border-radius: 4px;
   padding: 8px;
-  font-size: rem(24);
+  font-size: rem(16);
   cursor: pointer;
+  color: $gray;
 
   fa-icon {
     font-size: rem(20);
@@ -25,21 +26,21 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
-  border: 4px solid $black;
+  background: $element-dark;
+  border: 1px solid $gray;
   border-radius: 50%;
-  padding: 8px;
-  font-size: rem(24);
-  width: 48px;
-  height: 48px;
+  font-size: rem(16);
+  width: 32px;
+  height: 32px;
   cursor: pointer;
 
   fa-icon {
     display: flex;
     font-size: rem(20);
+    color: $gray;
   }
 
-  &--small {
+  &--size-small {
     border: 2px solid $black;
     width: 22px;
     height: 22px;
@@ -49,13 +50,26 @@
     }
   }
 
-  &:hover {
+  &--size-big {
+    width: 72px;
+    height: 72px;
+
+    fa-icon {
+      font-size: rem(20);
+    }
+  }
+
+  &:not(:disabled):hover {
     background: $gray;
+    border-color: $element-dark;
+
+    fa-icon {
+      color: $element-dark;
+    }
   }
 
   &:disabled {
     background-color: $light-gray;
-    border-color: $light-gray;
     cursor: not-allowed;
   }
 }
