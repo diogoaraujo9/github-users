@@ -59,8 +59,7 @@ export class RepositoryListComponent implements OnChanges, OnInit {
     const searchResult = await this.repositoryHttpService.loadRepositories(this.filter);
 
     this.repositories = searchResult?.items || [];
-    const totalCount = searchResult?.total_count || 0;
-    this.repositoryTotalPages = Math.ceil(totalCount / this.filter.perPage);
+    this.repositoryTotalPages = Math.ceil((searchResult?.total_count || 0) / this.filter.perPage);
 
     this.loadingRepositories = false;
   }

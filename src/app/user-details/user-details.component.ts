@@ -45,18 +45,17 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   public async loadUserDetails(username: string): Promise<void> {
     this.loadingUser = true;
-    let user: User | null = this.userService.getUser(username);
+    let user: User | null = await this.userHttpService.loadUser(username);
 
-    if (!user) {
-      user = await this.userHttpService.loadUser(username);
-
-      if (!user) {
-        this.loadingUser = false;
-        return;
-      }
+    if (!user && !this.user) {
+      this.navigateToSearchPage();
+      return;
     }
 
-    this.user = user;
+    if (user) {
+      this.user = user;
+    }
+
     this.loadingUser = false;
   }
 

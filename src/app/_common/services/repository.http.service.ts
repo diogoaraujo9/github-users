@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { RepositoryFilter } from '../models/repository-filter';
 import { RepositorySearchResult } from '../models/repository-search-result';
@@ -12,7 +13,11 @@ import { RepositoryService } from './repository.service';
 export class RepositoryHttpService {
   private headers: HttpHeaders;
 
-  constructor(private http: AsyncHttpClient, private repositoryService: RepositoryService) {
+  constructor(
+    private http: AsyncHttpClient,
+    private repositoryService: RepositoryService,
+    private toastrService: ToastrService
+  ) {
     this.headers = new HttpHeaders({
       Accept: 'application/vnd.github+json'
     });
@@ -39,7 +44,13 @@ export class RepositoryHttpService {
       }
 
       return searchResult;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.status === 0) {
+        this.toastrService.error('Conexão perdida', 'Erro');
+      } else if (error?.error?.message) {
+        this.toastrService.error(error.error.message, 'Erro');
+      }
+
       return null;
     }
   }
