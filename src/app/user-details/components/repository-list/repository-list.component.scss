@@ -4,6 +4,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 12px 0;
+
+  .filters {
+    display: flex;
+
+    input {
+      max-width: 200px;
+    }
+  }
 }
 
 .repository-list {
@@ -43,10 +52,11 @@
   }
 
   &__column {
+    cursor: pointer;
+
     &:nth-child(1) {
       flex-grow: 1;
       width: 95%;
-      cursor: pointer;
     }
 
     &:nth-child(2) {

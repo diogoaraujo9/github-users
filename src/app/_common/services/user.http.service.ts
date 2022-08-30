@@ -15,6 +15,10 @@ export class UserHttpService {
     this.headers = new HttpHeaders({
       Accept: 'application/vnd.github.v3+json'
     });
+
+    if (environment.token) {
+      this.headers.append('Authorization', `token ${environment.token}`);
+    }
   }
 
   public async loadUser(username: string): Promise<User | null> {

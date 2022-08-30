@@ -1,8 +1,32 @@
+<h2>Repositórios</h2>
+
 <div class="list-header">
-  <h2>Repositórios</h2>
+  <div
+    *ngIf="!selectedRepository"
+    class="filters"
+  >
+    <div>
+      <label for="repository-filter">Nome:</label>
+      <input
+        id="repository-filter"
+        (input)="filterRepositories()"
+        [(ngModel)]="filter.name"
+      />
+    </div>
+
+    <div>
+      <label for="repository-filter">Quantidade mínima de estrelas:</label>
+      <input
+        id="repository-filter"
+        type="number"
+        (input)="filterRepositories()"
+        [(ngModel)]="filter.minStarsQuantity"
+      />
+    </div>
+  </div>
   <pagination
     *ngIf="!selectedRepository"
-    [currentPage]="repositoryCurrentPage"
+    [currentPage]="filter.page"
     [totalPages]="repositoryTotalPages"
     (updatedPage)="loadRepositories($event)"
   >
@@ -11,16 +35,26 @@
 <div class="repository-list">
   <div
     class="repository-list__columns"
-    [class.hidden]="!repositories.length || selectedRepository"
+    [class.hidden]="selectedRepository"
   >
     <div
       class="repository-list__column"
-      (click)="changeSortDirection()"
+      (click)="changeSortDirection('name')"
     >
-      <fa-icon [icon]="sortDirection === 'asc' ? faArrowUp : faArrowDown"></fa-icon>
+      <fa-icon
+        *ngIf="filter.sort === 'name'"
+        [icon]="filter.sortDirection === 'asc' ? faArrowUp : faArrowDown"
+      ></fa-icon>
       <strong>Nome</strong>
     </div>
-    <div class="repository-list__column">
+    <div
+      class="repository-list__column"
+      (click)="changeSortDirection('stars')"
+    >
+      <fa-icon
+        *ngIf="filter.sort === 'stars'"
+        [icon]="filter.sortDirection === 'asc' ? faArrowUp : faArrowDown"
+      ></fa-icon>
       <strong>Stars</strong>
     </div>
   </div>
