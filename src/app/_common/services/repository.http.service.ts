@@ -18,7 +18,7 @@ export class RepositoryHttpService {
     });
 
     if (environment.token) {
-      this.headers.append('Authorization', `token ${environment.token}`);
+      this.headers = this.headers.append('Authorization', `token ${environment.token}`);
     }
   }
 

@@ -17,26 +17,13 @@ export class UserHttpService {
     });
 
     if (environment.token) {
-      this.headers.append('Authorization', `token ${environment.token}`);
+      this.headers = this.headers.append('Authorization', `token ${environment.token}`);
     }
   }
 
   public async loadUser(username: string): Promise<User | null> {
     try {
       const res = await this.http.get<User>(`${environment.gitHubBaseUrl}/users/${username}`, {
-        headers: this.headers
-      });
-
-      this.userService.storeUser(res.body as User);
-      return res.body;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  public async loadRepositories(username: string): Promise<User | null> {
-    try {
-      const res = await this.http.get<User>(`${environment.gitHubBaseUrl}/users/${username}/repos`, {
         headers: this.headers
       });
 
