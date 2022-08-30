@@ -9,6 +9,7 @@
       type="text"
       formControlName="username"
       maxlength="39"
+      [disabled]="loading"
       [placeholder]="size === 'big' ? 'Digite o “User-nam3” que está procurando…' : 'Digite o “User-nam3”'"
       [class.input--size-big]="size === 'big'"
       [class.error]="form.invalid && (form.dirty || form.touched)"
@@ -24,6 +25,14 @@
     [disabled]="form.invalid"
     (click)="searchUser()"
   >
-    <fa-icon [icon]="faArrowRightLong"></fa-icon>
+    <fa-icon
+      *ngIf="!loading"
+      [icon]="faArrowRightLong"
+    ></fa-icon>
+    <fa-icon
+      *ngIf="loading"
+      [icon]="faSpinner"
+      [spin]="true"
+    ></fa-icon>
   </button>
 </form>

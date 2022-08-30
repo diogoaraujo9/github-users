@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { faArrowDown, faArrowLeft, faArrowUp, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowLeft, faArrowUp, faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
 
 import { Repository } from '../../../_common/models/repository';
 import { User } from '../../../_common/models/user';
@@ -17,10 +17,12 @@ export class RepositoryListComponent implements OnChanges {
   public repositoryCurrentPage: number = 1;
   public repositoryTotalPages: number = 1;
   public sortDirection: 'asc' | 'desc' = 'asc';
+  public loadingRepositories: boolean = false;
   public faArrowLeft = faArrowLeft;
   public faStar = faStar;
   public faArrowUp = faArrowUp;
   public faArrowDown = faArrowDown;
+  public faSpinner = faSpinner;
   private readonly repositoryPerPage: number = 10;
 
   constructor(private repositoryHttpService: RepositoryHttpService) {}
@@ -36,6 +38,8 @@ export class RepositoryListComponent implements OnChanges {
       return;
     }
 
+    this.loadingRepositories = true;
+
     this.repositoryTotalPages = Math.ceil(this.user.public_repos / this.repositoryPerPage);
     this.repositoryCurrentPage = page;
     this.repositories =
@@ -45,6 +49,8 @@ export class RepositoryListComponent implements OnChanges {
         this.repositoryPerPage,
         this.sortDirection
       )) || [];
+
+    this.loadingRepositories = false;
   }
 
   public showRepositoryDetails(repository: Repository): void {

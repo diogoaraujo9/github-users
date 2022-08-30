@@ -34,7 +34,7 @@ export class RepositoryHttpService {
       this.repositoryService.storeRepositories(res.body as Repository[]);
       return res.body;
     } catch (error) {
-      return null;
+      return [];
     }
   }
 }

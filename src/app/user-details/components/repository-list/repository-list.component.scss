@@ -58,4 +58,21 @@
   fa-icon {
     margin-right: 4px;
   }
+
+  &__empty-message {
+    font-size: rem(24);
+  }
+
+  &__empty-message,
+  .loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin: 20px 0;
+  }
+
+  .loading-container {
+    font-size: rem(60);
+  }
 }

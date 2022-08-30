@@ -1,6 +1,7 @@
 <div class="list-header">
   <h2>Repositórios</h2>
   <pagination
+    *ngIf="!selectedRepository"
     [currentPage]="repositoryCurrentPage"
     [totalPages]="repositoryTotalPages"
     (updatedPage)="loadRepositories($event)"
@@ -8,7 +9,10 @@
   </pagination>
 </div>
 <div class="repository-list">
-  <div class="repository-list__columns">
+  <div
+    class="repository-list__columns"
+    [class.hidden]="!repositories.length || selectedRepository"
+  >
     <div
       class="repository-list__column"
       (click)="changeSortDirection()"
@@ -22,7 +26,7 @@
   </div>
 
   <div class="card">
-    <ng-container *ngIf="!selectedRepository">
+    <ng-container *ngIf="!loadingRepositories && !selectedRepository">
       <div
         *ngFor="let repository of repositories"
         class="repository-list__item"
@@ -36,12 +40,28 @@
           <p><fa-icon [icon]="faStar"></fa-icon> {{ repository.stargazers_count }}</p>
         </div>
       </div>
+      <div
+        *ngIf="!repositories?.length"
+        class="repository-list__empty-message"
+      >
+        Esse usuário não possui repositórios públicos
+      </div>
     </ng-container>
-    <ng-container *ngIf="selectedRepository">
+
+    <ng-container *ngIf="!loadingRepositories && selectedRepository">
       <repository-details
         [repository]="selectedRepository"
         (goBack)="showRepositoryList()"
       ></repository-details>
+    </ng-container>
+
+    <ng-container *ngIf="loadingRepositories">
+      <div class="loading-container">
+        <fa-icon
+          [icon]="faSpinner"
+          [spin]="true"
+        ></fa-icon>
+      </div>
     </ng-container>
   </div>
 </div>

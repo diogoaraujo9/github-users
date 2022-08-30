@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faLocationDot, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 
 import { User } from '../_common/models/user';
@@ -14,8 +14,10 @@ import { UserService } from '../_common/services/user.service';
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   public user: User | null = null;
+  public loadingUser: boolean = false;
   public faLocationDot = faLocationDot;
   public faArrowLeft = faArrowLeft;
+  public faSpinner = faSpinner;
   private subscriptions = new Subscription();
 
   constructor(
@@ -42,17 +44,20 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   public async loadUserDetails(username: string): Promise<void> {
+    this.loadingUser = true;
     let user: User | null = this.userService.getUser(username);
 
     if (!user) {
       user = await this.userHttpService.loadUser(username);
 
       if (!user) {
+        this.loadingUser = false;
         return;
       }
     }
 
     this.user = user;
+    this.loadingUser = false;
   }
 
   public navigateToSearchPage(): void {

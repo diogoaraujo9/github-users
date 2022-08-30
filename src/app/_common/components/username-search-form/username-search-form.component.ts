@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowRightLong, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightLong, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UsernameSearchFormComponent {
   @Input() size: 'big' | 'normal' = 'big';
+  @Input() loading: boolean = false;
   @Output() searchUsername = new EventEmitter<string>();
   public usernameControl = new FormControl('', [Validators.required, this.userService.validateFormUsername()]);
   public form: FormGroup = new FormGroup({
@@ -21,6 +22,7 @@ export class UsernameSearchFormComponent {
   });
   public faMagnifyingGlass = faMagnifyingGlass;
   public faArrowRightLong = faArrowRightLong;
+  public faSpinner = faSpinner;
 
   constructor(private userService: UserService) {}
 

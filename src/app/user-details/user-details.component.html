@@ -9,12 +9,16 @@
     />
     <username-search-form
       size="normal"
+      [loading]="loadingUser"
       (searchUsername)="changeUser($event)"
     >
     </username-search-form>
   </div>
 
-  <div class="user-page__content">
+  <div
+    *ngIf="!loadingUser"
+    class="user-page__content"
+  >
     <div class="user-details">
       <img [src]="user?.avatar_url" />
       <div class="user-details__info">
@@ -39,5 +43,14 @@
     </div>
 
     <repository-list [user]="user"></repository-list>
+  </div>
+  <div
+    *ngIf="loadingUser"
+    class="loading-container"
+  >
+    <fa-icon
+      [icon]="faSpinner"
+      [spin]="true"
+    ></fa-icon>
   </div>
 </div>

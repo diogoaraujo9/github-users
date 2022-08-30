@@ -1,3 +1,7 @@
 @forward './functions/font.scss';
 
 @forward './variables/colors.scss';
+
+.hidden {
+  visibility: hidden;
+}
