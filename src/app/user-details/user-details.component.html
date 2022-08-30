@@ -16,7 +16,7 @@
   </div>
 
   <div
-    *ngIf="!loadingUser"
+    *ngIf="user || !loadingUser"
     class="user-page__content"
   >
     <div class="user-details">
@@ -45,7 +45,7 @@
     <repository-list [user]="user"></repository-list>
   </div>
   <div
-    *ngIf="loadingUser"
+    *ngIf="loadingUser && !user"
     class="loading-container"
   >
     <fa-icon

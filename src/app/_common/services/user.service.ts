@@ -21,7 +21,7 @@ export class UserService {
   public validateFormUsername(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       // Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
-      const valid = /^[a-z\d]+([a-z\d]|-(?=[a-z\d]))*$/.test(control.value);
+      const valid = /^[\w\d]+([\w\d]|-(?=[\w\d]))*$/.test(control.value);
       return valid ? null : { invalidUsername: { value: control.value } };
     };
   }

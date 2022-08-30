@@ -39,11 +39,19 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public changeUser(username: string): void {
-    this.router.navigate(['user', username]);
+  public async changeUser(username: string): Promise<void> {
+    await this.loadUserDetails(username);
+
+    if (this.isUserLoaded(username)) {
+      this.router.navigate(['user', username]);
+    }
   }
 
   public async loadUserDetails(username: string): Promise<void> {
+    if (this.isUserLoaded(username)) {
+      return;
+    }
+
     this.loadingUser = true;
     let user: User | null = await this.userHttpService.loadUser(username);
 
@@ -61,5 +69,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   public navigateToSearchPage(): void {
     this.router.navigate(['search']);
+  }
+
+  private isUserLoaded(username: string) {
+    return this.user?.login?.toLocaleLowerCase() === username.toLocaleLowerCase();
   }
 }
