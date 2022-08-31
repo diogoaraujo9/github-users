@@ -1,0 +1,13 @@
+{
+  "login": "fakeUser",
+  "id": 123,
+  "avatar_url": "https://avatars.githubusercontent.com/u/123?v=4",
+  "url": "https://api.github.com/users/fakeUser",
+  "type": "User",
+  "name": "fakeUser",
+  "location": "AB",
+  "bio": "fakeBio",
+  "public_repos": 20,
+  "followers": 10,
+  "following": 10
+}

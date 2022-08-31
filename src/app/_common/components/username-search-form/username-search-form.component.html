@@ -9,7 +9,6 @@
       type="text"
       formControlName="username"
       maxlength="39"
-      [disabled]="loading"
       [placeholder]="size === 'big' ? 'Digite o “User-nam3” que está procurando…' : 'Digite o “User-nam3”'"
       [class.input--size-big]="size === 'big'"
       [class.error]="form.invalid && (form.dirty || form.touched)"

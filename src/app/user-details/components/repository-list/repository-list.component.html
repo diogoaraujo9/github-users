@@ -6,18 +6,18 @@
     class="filters"
   >
     <div>
-      <label for="repository-filter">Nome:</label>
+      <label for="repository-name-filter">Nome:</label>
       <input
-        id="repository-filter"
+        id="repository-name-filter"
         (input)="filterRepositories()"
         [(ngModel)]="filter.name"
       />
     </div>
 
     <div>
-      <label for="repository-filter">Quantidade mínima de estrelas:</label>
+      <label for="repository-stars-filter">Quantidade mínima de estrelas:</label>
       <input
-        id="repository-filter"
+        id="repository-stars-filter"
         type="number"
         (input)="filterRepositories()"
         [(ngModel)]="filter.minStarsQuantity"

@@ -18,13 +18,13 @@ export class PaginationComponent {
 
   public goToNextPage(): void {
     if (this.currentPage < this.totalPages) {
-      this.updatedPage.next(this.currentPage + 1);
+      this.updatedPage.emit(this.currentPage + 1);
     }
   }
 
   public goToPreviousPage(): void {
     if (this.currentPage > 1) {
-      this.updatedPage.next(this.currentPage - 1);
+      this.updatedPage.emit(this.currentPage - 1);
     }
   }
 }

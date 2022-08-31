@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRightLong, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./username-search-form.component.scss'],
   imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule]
 })
-export class UsernameSearchFormComponent {
+export class UsernameSearchFormComponent implements OnChanges {
   @Input() size: 'big' | 'normal' = 'big';
   @Input() loading: boolean = false;
   @Output() searchUsername = new EventEmitter<string>();
@@ -25,6 +25,16 @@ export class UsernameSearchFormComponent {
   public faSpinner = faSpinner;
 
   constructor(private userService: UserService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['loading']) {
+      if (this.loading) {
+        this.usernameControl.disable();
+      } else {
+        this.usernameControl.enable();
+      }
+    }
+  }
 
   public searchUser(): void {
     if (this.form.invalid) {

@@ -52,16 +52,25 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.loadingUser = true;
-    let user: User | null = await this.userHttpService.loadUser(username);
+    // Usuário ainda não carregado, existem chances de ter sido carregado na página de pesquisa
+    if (!this.user) {
+      this.user = this.userService.getUser(username);
 
-    if (!user && !this.user) {
+      if (this.user) {
+        return;
+      }
+    }
+
+    this.loadingUser = true;
+    const foundUser = await this.userHttpService.loadUser(username);
+
+    if (!foundUser && !this.user) {
       this.navigateToSearchPage();
       return;
     }
 
-    if (user) {
-      this.user = user;
+    if (foundUser) {
+      this.user = foundUser;
     }
 
     this.loadingUser = false;
