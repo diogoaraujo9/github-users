@@ -80,7 +80,7 @@ O GitHub limita a quantidade chamadas de API feitas por hora. Chamadas não aute
 
 Para gerar um Personal Access Token, siga o [tutorial da GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-### Configuração do ESLint e Prettier (opcional)
+## Configuração do ESLint e Prettier (opcional)
 
 O projeto possui o `ESlint` e o `Prettier` configurados, o que facilita a padronização de códigos. Para aproveitar dessas configurações no `VSCode`, instale as seguintes extensões:
 
