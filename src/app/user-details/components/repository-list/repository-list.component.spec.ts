@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
@@ -61,6 +61,8 @@ describe('RepositoryListComponent', () => {
     expect(spyLoadRepositories).toHaveBeenCalled();
     expect(component.filter.name).toBe('repo');
     expect(component.filter.minStarsQuantity).toBe(2);
+
+    flush();
   }));
 
   it('should sort with provided values', () => {

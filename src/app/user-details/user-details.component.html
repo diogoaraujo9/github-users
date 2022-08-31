@@ -22,16 +22,28 @@
     <div class="user-details">
       <img [src]="user?.avatar_url" />
       <div class="user-details__info">
-        <p *ngIf="user?.name">{{ user?.name }}</p>
-        <p *ngIf="user?.login">{{ user?.login }}</p>
+        <p
+          *ngIf="user?.name"
+          data-testid="user-name"
+        >
+          {{ user?.name }}
+        </p>
+        <p
+          *ngIf="user?.login"
+          data-testid="user-login"
+        >
+          {{ user?.login }}
+        </p>
         <p
           *ngIf="user?.bio"
+          data-testid="user-bio"
           class="description"
         >
           {{ user?.bio }}
         </p>
         <p
           *ngIf="user?.location"
+          data-testid="user-location"
           class="user-details__row"
         >
           <fa-icon [icon]="faLocationDot"></fa-icon>{{ user?.location }}

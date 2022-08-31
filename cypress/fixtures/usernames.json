@@ -1,0 +1,3 @@
+{
+  "invalidUsernames": ["-invalid", "invalid-", "inva--lid", "inva lid", "inv@lid"]
+}

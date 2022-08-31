@@ -9,6 +9,7 @@
       <label for="repository-name-filter">Nome:</label>
       <input
         id="repository-name-filter"
+        data-testid="repository-name-filter"
         (input)="filterRepositories()"
         [(ngModel)]="filter.name"
       />
@@ -18,6 +19,7 @@
       <label for="repository-stars-filter">Quantidade mínima de estrelas:</label>
       <input
         id="repository-stars-filter"
+        data-testid="repository-stars-filter"
         type="number"
         (input)="filterRepositories()"
         [(ngModel)]="filter.minStarsQuantity"
@@ -38,6 +40,7 @@
     [class.hidden]="selectedRepository"
   >
     <div
+      data-testid="sort-name"
       class="repository-list__column"
       (click)="changeSortDirection('name')"
     >
@@ -48,6 +51,7 @@
       <strong>Nome</strong>
     </div>
     <div
+      data-testid="sort-stars"
       class="repository-list__column"
       (click)="changeSortDirection('stars')"
     >
@@ -63,11 +67,12 @@
     <ng-container *ngIf="!loadingRepositories && !selectedRepository">
       <div
         *ngFor="let repository of repositories"
+        data-testid="repository-row"
         class="repository-list__item"
         (click)="showRepositoryDetails(repository)"
       >
         <div class="repository-list__column">
-          <p>{{ repository.name }}</p>
+          <p data-testid="repository-row-name">{{ repository.name }}</p>
           <p class="description">{{ repository.description }}</p>
         </div>
         <div class="repository-list__column">

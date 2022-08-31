@@ -5,6 +5,7 @@
   <div class="input-icon username-form__search">
     <input
       id="github-user-search"
+      data-testid="github-user-search"
       class="input-icon"
       type="text"
       formControlName="username"
@@ -18,6 +19,7 @@
   </div>
 
   <button
+    data-testid="github-user-search-button"
     class="icon-button"
     type="button"
     [class.icon-button--size-big]="size === 'big'"
