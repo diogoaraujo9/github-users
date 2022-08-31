@@ -67,7 +67,7 @@ O relatório de resultados se encontrará no caminho: `./coverage`
 ### Testes integrados
 
 O projeto conta com testes unitários criados com o `Cypress`. Para rodar os testes integrados, execute o comando abaixo na raíz do projeto:
-
+OBS: para que o comando abaixo funcione, é necessário manter o projeto rodando em outro terminal
 ```
 npm run cypress:run
 ```
