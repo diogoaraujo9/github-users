@@ -5,6 +5,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     supportFile: 'cypress/support/index.ts'
   },
+  chromeWebSecurity: false,
   component: {
     devServer: {
       framework: 'angular',
