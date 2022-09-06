@@ -30,6 +30,7 @@ describe('User Details Page', () => {
 
   it('sort by name', () => {
     cy.clearRepositoryFilters();
+    cy.wait(500);
 
     cy.getByTestId('sort-name').click();
     cy.wait(500);
@@ -42,6 +43,7 @@ describe('User Details Page', () => {
 
   it('sort by stars', () => {
     cy.clearRepositoryFilters();
+    cy.wait(500);
 
     cy.getByTestId('sort-stars').click();
     cy.wait(500);
@@ -54,6 +56,7 @@ describe('User Details Page', () => {
 
   it('toggle between repository list and details mode', () => {
     cy.clearRepositoryFilters();
+    cy.wait(500);
 
     cy.getByTestId('repository-row').first().click();
 
